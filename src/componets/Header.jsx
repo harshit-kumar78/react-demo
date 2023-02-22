@@ -1,7 +1,9 @@
 import React from "react";
 
 const Header = () => {
-  return <h1>Header component cretead</h1>;
+
+  const obj = {color:'red',backgroundColor:'green'}
+  return <h1 style={obj}>Header component created</h1>;
 };
 
 export default Header;
