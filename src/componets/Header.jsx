@@ -1,17 +1,20 @@
 import React, { useState } from "react";
 
-const Header = () => {
-  const [name,setName] = useState('harshit');
-  const obj = {color:'red',backgroundColor:'green'}
-  const add = 'https://upload.wikimedia.org/wikipedia/commons/3/3c/IMG_logo_%282017%29.svg';
-  const add2 = 'https://upload.wikimedia.org/wikipedia/commons/3/3c/IMG_logo_%282017%29.svg';
-  let bool = true;
+const Header = ({name,email,address,a,set}) => {
+
+  // console.log(props);
+  return(
+    <div style={{backgroundColor:'yellow'}}>
+        Name:<h1>{name}</h1>
+        email:<h2>{email}</h2>
+        city:<h3>{address.city}</h3>
+        state:<h3>{address.state}</h3>
+        {a(1,2)}
+        <button onClick={() => set("pankaj")}>change name</button>
+    </div>)
+  
  
-  return <>
-  <img src={bool?add2:add} style={{height:'200px'}}/>
-  <h1>{name}</h1>
-  <button onClick={()=>setName('dipannita')}>change</button>
-  </>;
+ 
 };
 
 export default Header;
