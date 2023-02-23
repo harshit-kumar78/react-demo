@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import "../../node_modules/bootstrap/dist/css/bootstrap.min.css";
 import axios from "axios";
+import Employees from "./Employees";
 const Login = () => {
   const [data, setData] = useState({ username: "", password: "" });
   const [status, setStatus] = useState(null);
@@ -26,6 +27,26 @@ const Login = () => {
         password: 8987647638,
       })
       .then((res) => console.log(res.data))
+      .catch((err) => console.log(err));
+  };
+  const delData = () => {
+    axios
+      .delete(" http://localhost:4000/credentials/7003")
+      .then((res) => axios.get("http://localhost:4000/credentials"))
+      .then((res) => console.log(res.data))
+      .catch((err) => console.log(err))
+      .catch((err) => console.log(err));
+  };
+  const updateData = (e) => {
+    let data = {
+      name: "zxyput",
+      email: "gfgfgfg",
+    };
+    axios
+      .put("http://localhost:4000/credentials/7009", data)
+      .then((res) => {
+        console.log(res.data);
+      })
       .catch((err) => console.log(err));
   };
   return (
@@ -67,6 +88,8 @@ const Login = () => {
         <p className="text-danger">enter username and password</p>
       )}
       <button onClick={sendData}>send data</button>
+      <button onClick={delData}>del data</button>
+      <button onClick={updateData}>update data</button>
     </div>
   );
 };
