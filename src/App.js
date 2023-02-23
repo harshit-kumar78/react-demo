@@ -3,16 +3,15 @@ import "./App.css";
 import Student from "./componets/Student";
 import { useEffect, useState } from "react";
 import Body from "./componets/Body";
-
+import User from "./componets/User";
 function App() {
   const [data, setData] = useState(10);
-  useEffect(() => {
-    console.log("useEffect called 2");
-  }, [data]);
+  const [count, setCount] = useState(100);
   return (
     <div className="App">
-      <h1>{data}</h1>
+      <User data={data} count={count} />
       <button onClick={() => setData(data + 1)}>update data</button>
+      <button onClick={() => setCount(count + 1)}>update count</button>
     </div>
   );
 }
