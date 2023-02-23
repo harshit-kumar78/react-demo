@@ -1,22 +1,18 @@
 import logo from "./logo.svg";
 import "./App.css";
 import Student from "./componets/Student";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Body from "./componets/Body";
 
 function App() {
-  const [a, setA] = useState("gigo");
-  function sendData(data) {
-    setA(data);
-  }
+  const [data, setData] = useState(10);
+  useEffect(() => {
+    console.log("useEffect called 2");
+  }, [data]);
   return (
     <div className="App">
-      {/* <p>{a}</p> */}
-
-      <Body>
-        <Student f={sendData}></Student>
-        <Student f={sendData}></Student>
-      </Body>
+      <h1>{data}</h1>
+      <button onClick={() => setData(data + 1)}>update data</button>
     </div>
   );
 }
