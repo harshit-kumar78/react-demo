@@ -6,14 +6,12 @@ import Body from "./componets/Body";
 import User from "./componets/User";
 import FetchData from "./componets/FetchData";
 import Employees from "./componets/Employees";
+import Login from "./componets/Login";
 function App() {
   const [display, setDisplay] = useState(true);
   return (
     <div className="App">
-      {/* <button onClick={() => setDisplay(!display)}>toogle</button>
-      {display && <User />} */}
-
-      <Employees></Employees>
+      <Login></Login>
     </div>
   );
 }
