@@ -1,6 +1,6 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import "../../node_modules/bootstrap/dist/css/bootstrap.min.css";
-
+import axios from "axios";
 const Login = () => {
   const [data, setData] = useState({ username: "", password: "" });
   const [status, setStatus] = useState(null);
@@ -17,12 +17,23 @@ const Login = () => {
       setStatus(true);
     }
   };
+
+  const sendData = (e) => {
+    e.preventDefault();
+    axios
+      .post(" http://localhost:4000/credentials", {
+        email: "hk4@gmail.com",
+        password: 8987647638,
+      })
+      .then((res) => console.log(res.data))
+      .catch((err) => console.log(err));
+  };
   return (
     <div className="container">
       <form onSubmit={handleSubmit}>
         <div className="form-group">
           <label htmlFor="name">Username:</label>
-          {data.username} - {data.password}
+
           <input
             style={{ width: "40%" }}
             type="text"
@@ -55,6 +66,7 @@ const Login = () => {
       {status == false && (
         <p className="text-danger">enter username and password</p>
       )}
+      <button onClick={sendData}>send data</button>
     </div>
   );
 };

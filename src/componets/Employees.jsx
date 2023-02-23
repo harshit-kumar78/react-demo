@@ -1,44 +1,117 @@
-import axios from 'axios';
-import React, { useEffect, useState } from 'react';
-
-const Employees = () =>{
-
-    const [employees,setEmployees] = useState([]);
-
-    useEffect(()=>{
-        axios.get('employees.json').then(result=>setEmployees(result.data)).catch(err=>console.log(err))
-       
-    },[])
-
-    const addEmp = (e)=>{
-        e.preventDefault();
-        setEmployees([...employees,{name:'harshit',empId:7890,designation:'DSE'}])
+import React, { useState, useEffect } from "react";
+import axios from "axios";
+import "bootstrap/dist/css/bootstrap.min.css";
+const Employees = () => {
+  const [employees, setEmployees] = useState([]);
+  useEffect(() => {
+    axios.get("http://localhost:4000/employees").then((res) => {
+      setEmployees(res.data);
+    });
+  }, []);
+  const [name, setName] = useState("");
+  const [designation, setDesignation] = useState("");
+  const [addFlag, setAddFlag] = useState(false);
+  const [message, setMessage] = useState("");
+  const [success, setSuccess] = useState("");
+  const addEmployee = (e) => {
+    e.preventDefault();
+    setSuccess("");
+    if (name === "" || designation === "") {
+      setMessage("Please enter the values");
+    } else {
+      setMessage("");
+      setAddFlag(false);
+      let newEmployee = { name: name, designation: designation };
+      axios
+        .post("http://localhost:4000/employees", JSON.stringify(newEmployee))
+        .then((res) => {
+          setEmployees([...employees, res.data]);
+          setSuccess(`New Employee has been added with the id ${res.data.id} `);
+        });
+      setName("");
+      setDesignation("");
     }
-    return(<div>
-        <table>
-            <thead>
-                <tr>
-                    <th>EMP ID</th>
-                    <th>NAME</th>
-                    <th>DESIGNATION</th>
+  };
+  const deleteEmployee = (empId) => {
+    setSuccess("");
+    let employeeId = parseInt(empId);
+    axios
+      .delete("http://localhost:4000/employees/" + employeeId)
+      .then((res) => {
+        axios.get("http://localhost:4000/employees").then((res) => {
+          setEmployees(res.data);
+        });
+      });
+  };
+  return (
+    <>
+      <table style={{ width: "60%" }} className="table table-bordered">
+        <thead>
+          <tr>
+            <th>EmpID</th>
+            <th>Name</th>
+            <th>Designation</th>
+            <th>Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          {employees.length > 0 ? (
+            employees.map((employee) => {
+              return (
+                <tr key={employee.empId}>
+                  <td>{employee.id}</td>
+                  <td>{employee.name}</td>
+                  <td>{employee.designation}</td>
+                  <td>
+                    <button onClick={() => deleteEmployee(employee.id)}>
+                      <i className="fa fa-trash"></i>
+                    </button>
+                  </td>
                 </tr>
-            </thead>
-            <tbody>
-             
-                    {employees.map((emp)=>{
-                        return <tr key={emp.empId}>
-                            <td>{emp.empId}</td>
-                             <td>{emp.name}</td>
-                              <td>{emp.designation}</td>
-                        </tr>
-                    })}
-              
-            </tbody>
-        </table>
-
-        <button onClick={addEmp}>Add an employee</button>
-    </div>)
-}
-
-
+              );
+            })
+          ) : (
+            <div>No data found</div>
+          )}
+        </tbody>
+      </table>
+      <button onClick={() => setAddFlag(!addFlag)} className="btn btn-primary">
+        Add Employee
+      </button>
+      <br />
+      <br />
+      <div className="text-success">{success}</div>
+      {addFlag ? (
+        <form>
+          EmpName:{" "}
+          <input
+            type="text"
+            value={name}
+            onChange={(e) => {
+              setName(e.target.value);
+              setMessage("");
+            }}
+          />
+          <br />
+          <br />
+          Designation:
+          <input
+            type="text"
+            value={designation}
+            onChange={(e) => {
+              setDesignation(e.target.value);
+              setMessage("");
+            }}
+          />
+          <br />
+          <br />
+          <button onClick={addEmployee} className="btn btn-primary">
+            Add
+          </button>
+          <div className="text-danger">{message}</div>
+        </form>
+      ) : null}
+    </>
+  );
+};
 export default Employees;
