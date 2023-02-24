@@ -25,6 +25,7 @@ function App() {
     <div className="App">
       <Router>
         <Routes>
+          <Route path="/:name" element={<NavBar />} />
           <Route path="/landing/:name/*" element={<Landing />} />
 
           <Route path="*" element={<PageNotFound />} />
