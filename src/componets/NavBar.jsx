@@ -1,5 +1,5 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { Link, Outlet } from "react-router-dom";
 
 const NavBar = () => {
   return (
@@ -14,6 +14,7 @@ const NavBar = () => {
       <div>
         <Link to="contact">contact</Link>
       </div>
+      <Outlet></Outlet>
     </div>
   );
 };

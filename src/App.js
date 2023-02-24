@@ -16,17 +16,18 @@ function App() {
     <div className="App">
       <Router>
         <Routes>
-          <Route path="/" element={<NavBar />} />
+          <Route path="/" element={<NavBar />}>
+            <Route path="home" element={<Home />}>
+              <Route path="home-child-one" element={<HomeOne />} />
+              <Route path="home-child-two" element={<HomeTwo />} />
+            </Route>
+            <Route path="about" element={<About />}>
+              <Route path="about-child-one" element={<HomeOne />} />
+              <Route path="about-child-two" element={<HomeTwo />} />
+            </Route>
+            <Route path="/contact" element={<Contact />} />
+          </Route>
 
-          <Route path="/home/" element={<Home />}>
-            <Route path="home-child-one" element={<HomeOne />} />
-            <Route path="home-child-two" element={<HomeTwo />} />
-          </Route>
-          <Route path="/about" element={<About />}>
-            <Route path="about-child-one" element={<HomeOne />} />
-            <Route path="about-child-two" element={<HomeTwo />} />
-          </Route>
-          <Route path="/contact" element={<Contact />} />
           <Route path="*" element={<PageNotFound />} />
         </Routes>
       </Router>
