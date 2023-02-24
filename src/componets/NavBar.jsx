@@ -1,18 +1,18 @@
 import React from "react";
-import { Link, Outlet } from "react-router-dom";
+import { NavLink, Outlet, Link } from "react-router-dom";
 
 const NavBar = () => {
   return (
     <div>
       <h1>navbar</h1>
       <div>
-        <Link to="home">home</Link>
+        <NavLink to="home/5">home</NavLink>
       </div>
       <div>
-        <Link to="about">about</Link>
+        <NavLink to="about">about</NavLink>
       </div>
       <div>
-        <Link to="contact">contact</Link>
+        <NavLink to="contact">contact</NavLink>
       </div>
       <Outlet></Outlet>
     </div>
