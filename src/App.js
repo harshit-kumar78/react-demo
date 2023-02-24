@@ -17,6 +17,8 @@ function App() {
       <Router>
         <Routes>
           <Route path="/" element={<NavBar />}>
+            {/* This is the default child */}
+            {/* <Route index element={<Home />} />  */}
             <Route path="home" element={<Home />}>
               <Route path="home-child-one" element={<HomeOne />} />
               <Route path="home-child-two" element={<HomeTwo />} />
