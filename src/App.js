@@ -30,21 +30,7 @@ import Blog from "./componets/Blog";
 function App() {
   return (
     <div className="App">
-      <Router>
-        <Header />
-        <Routes>
-          <Route path="/" element={<Login />} />
-          <Route path="/home" element={<Protected Component={Home} />} />
-          <Route
-            path="/dashboard"
-            element={<Protected Component={Dashboard} />}
-          />
-          <Route path="/login" element={<Login />} />
-          <Route path="/profile" element={<Protected Component={Profile} />} />
-          <Route path="/order" element={<Protected Component={Order} />} />
-          <Route path="/blogs" element={<Protected Component={Blog} />} />
-        </Routes>
-      </Router>
+      <Home />
     </div>
   );
 }
