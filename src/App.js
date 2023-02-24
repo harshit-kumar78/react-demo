@@ -7,16 +7,25 @@ import Home from "./componets/Home";
 import About from "./componets/About";
 import Contact from "./componets/Contact";
 import PageNotFound from "./componets/PageNotFound";
-
+import HomeOne from "./componets/HomeOne";
+import HomeTwo from "./componets/HomeTwo";
+import NavBar from "./componets/NavBar";
 function App() {
   const [display, setDisplay] = useState(true);
   return (
     <div className="App">
       <Router>
         <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="/home" element={<Home />} />
-          <Route path="/about" element={<About />} />
+          <Route path="/" element={<NavBar />} />
+
+          <Route path="/home/" element={<Home />}>
+            <Route path="home-child-one" element={<HomeOne />} />
+            <Route path="home-child-two" element={<HomeTwo />} />
+          </Route>
+          <Route path="/about" element={<About />}>
+            <Route path="about-child-one" element={<HomeOne />} />
+            <Route path="about-child-two" element={<HomeTwo />} />
+          </Route>
           <Route path="/contact" element={<Contact />} />
           <Route path="*" element={<PageNotFound />} />
         </Routes>
