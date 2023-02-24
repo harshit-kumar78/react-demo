@@ -1,12 +1,6 @@
+import React from "react";
 
-
-import React from 'react'
-
-const Body = ({children})=>{
-
-    console.log('body component')
-    return <>{children}</>
-}
-
-
+export const Body = () => {
+  return <div>Body</div>;
+};
 export default Body;
