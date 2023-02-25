@@ -2,8 +2,14 @@ import React, { useContext } from "react";
 import { ContextApi } from "../App";
 
 const SuperChild = () => {
-  const { appColor } = useContext(ContextApi);
-  return <div style={{ color: appColor }}>SuperChild</div>;
+  let data = "red";
+  const { appColor, sendData } = useContext(ContextApi);
+  return (
+    <div style={{ color: appColor }}>
+      SuperChild
+      <button onClick={() => sendData(data)}>send data </button>
+    </div>
+  );
 };
 
 export default SuperChild;
